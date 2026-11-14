@@ -1,0 +1,56 @@
+---
+import { getCollection, render } from 'astro:content';
+import TableOfContents from '../../components/TableOfContents.astro';
+import CollectionTree from '../../components/CollectionTree.astro';
+import { buildContentTree, titleForEntry } from '../../lib/content';
+import { withBase } from '../../lib/urls';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import type { CollectionName, ContentEntry, TocHeading } from '../../types';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const collection of ['docs', 'misc'] as const) {
+    const entries = await getCollection(collection);
+    paths.push(
+      ...entries.map((entry) => ({
+        params: { collection, slug: entry.id },
+        props: { collection, entry }
+      }))
+    );
+  }
+  return paths;
+}
+
+const { collection, entry } = Astro.props as {
+  collection: CollectionName;
+  entry: ContentEntry;
+};
+const { Content, headings } = await render(entry);
+const label = collection === 'docs' ? 'Docs' : 'Misc';
+const path = `/${collection}/${entry.id}`;
+const collectionEntries = await getCollection(collection) as ContentEntry[];
+const tree = buildContentTree(collectionEntries);
+---
+
+<SiteLayout title={`${titleForEntry(entry)} — O.`} description={entry.data.description} active={collection}>
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
+    <article class="min-w-0">
+      <p class="font-mono text-sm text-[var(--text-subtle)]">{path}</p>
+      <h1 class="mt-4 text-2xl font-semibold tracking-tight text-[var(--text)] sm:text-3xl">{titleForEntry(entry)}</h1>
+      {entry.data.description && <p class="mt-4 text-base leading-7 text-[var(--text-muted)]">{entry.data.description}</p>}
+      <div class="prose mt-10 max-w-none prose-headings:scroll-mt-8 prose-a:text-[var(--accent)] prose-code:text-[var(--accent)]">
+        <Content />
+      </div>
+    </article>
+    <div class="lg:pt-1">
+      <aside class="rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] p-4">
+        <h2 class="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--text-subtle)]">{label} contents</h2>
+        <CollectionTree collection={collection} nodes={tree} />
+      </aside>
+      <TableOfContents headings={headings as TocHeading[]} />
+      <a class="mt-4 block text-sm text-[var(--text-muted)] transition hover:text-[var(--accent)]" href={withBase(collection)}>
+        ← Back to {label}
+      </a>
+    </div>
+  </div>
+</SiteLayout>

@@ -1,0 +1,95 @@
+---
+import '../styles/global.css';
+import { withBase } from '../lib/urls';
+
+interface Props {
+  title: string;
+  description?: string;
+  active?: 'home' | 'about' | 'docs' | 'misc';
+}
+
+const { title, description = 'A small personal site and notebook.', active } = Astro.props;
+const links = [
+  { label: 'Home', href: '/', key: 'home' },
+  { label: 'About me', href: '/about', key: 'about' },
+  { label: 'Docs', href: '/docs', key: 'docs' },
+  { label: 'Misc', href: '/misc', key: 'misc' }
+] as const;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      const savedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : systemTheme;
+    </script>
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-[var(--background)] text-[var(--text)] antialiased">
+    <header class="sticky top-0 z-20 border-b border-[var(--border)] bg-[var(--background)]">
+      <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8" aria-label="Main navigation">
+        <a class="text-lg font-semibold tracking-tight text-[var(--text)]" href={withBase()}>O.</a>
+        <div class="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 text-sm text-[var(--text-muted)]">
+          {links.map((link) => (
+            <a
+              class:list={[
+                'transition hover:text-[var(--accent)]',
+                active === link.key && 'text-[var(--text)]'
+              ]}
+              href={withBase(link.href)}
+              aria-current={active === link.key ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
+          <button
+            type="button"
+            class="rounded-sm border border-[var(--border-strong)] px-3 py-1.5 text-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            data-theme-toggle
+            aria-label="Current theme: system. Activate to switch theme."
+          >
+            Theme: system
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main class="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
+      <slot />
+    </main>
+    <footer class="mx-auto max-w-6xl px-5 pb-10 text-sm text-[var(--text-subtle)] sm:px-8">
+      <p>Built with Astro.</p>
+    </footer>
+    <script is:inline>
+      const themeButton = document.querySelector('[data-theme-toggle]');
+      const getTheme = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      const updateThemeButton = () => {
+        if (themeButton) {
+          const theme = getTheme();
+          themeButton.textContent = `Theme: ${theme}`;
+          themeButton.setAttribute('aria-label', `Current theme: ${theme}. Activate to switch theme.`);
+          themeButton.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        }
+      };
+      themeButton?.addEventListener('click', () => {
+        const nextTheme = getTheme() === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem('theme', nextTheme);
+        updateThemeButton();
+      });
+      updateThemeButton();
+    </script>
+  </body>
+</html>

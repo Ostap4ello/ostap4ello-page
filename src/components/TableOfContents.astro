@@ -1,0 +1,24 @@
+---
+import type { TocHeading } from '../types';
+
+interface Props {
+  headings: TocHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+{headings.length > 0 && (
+  <aside class="mt-6 rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] p-5">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--text-subtle)]">On this page</h2>
+    <nav class="mt-4" aria-label="Table of contents">
+      <ul class="space-y-2 text-sm text-[var(--text-muted)]">
+        {headings.map((heading) => (
+          <li style={`padding-left: ${(heading.depth - 2) * 0.75}rem`}>
+            <a class="transition hover:text-[var(--accent)]" href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </aside>
+)}

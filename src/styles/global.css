@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+:root {
+  color-scheme: light;
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f5f7fa;
+  --text: #202124;
+  --text-muted: #5f6368;
+  --text-subtle: #80868b;
+  --border: #dadce0;
+  --border-strong: #bdc1c6;
+  --accent: #1a73e8;
+  --accent-strong: #1557b0;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --background: #202124;
+  --surface: #292a2d;
+  --surface-muted: #303134;
+  --text: #f1f3f4;
+  --text-muted: #bdc1c6;
+  --text-subtle: #9aa0a6;
+  --border: #3c4043;
+  --border-strong: #5f6368;
+  --accent: #8ab4f8;
+  --accent-strong: #aecbfa;
+}
+
+@layer base {
+  html {
+    font-size: 90%;
+    font-family: 'Lato', Arial, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: inherit;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--background);
+  }
+}
+
+@layer components {
+  .prose {
+    --tw-prose-body: var(--text);
+    --tw-prose-headings: var(--text);
+    --tw-prose-lead: var(--text-muted);
+    --tw-prose-links: var(--accent);
+    --tw-prose-bold: var(--text);
+    --tw-prose-counters: var(--text-muted);
+    --tw-prose-bullets: var(--text-muted);
+    --tw-prose-hr: var(--border);
+    --tw-prose-quotes: var(--text);
+    --tw-prose-quote-borders: var(--border-strong);
+    --tw-prose-captions: var(--text-muted);
+    --tw-prose-kbd: var(--text);
+    --tw-prose-code: var(--accent);
+    --tw-prose-pre-code: var(--text);
+    --tw-prose-pre-bg: var(--surface-muted);
+    --tw-prose-th-borders: var(--border-strong);
+    --tw-prose-td-borders: var(--border);
+  }
+
+  .prose :where(p, li, dt, dd, figcaption, td) {
+    color: var(--text);
+  }
+
+  .prose :where(th) {
+    color: var(--text) !important;
+  }
+
+  .prose :where(h1, h2, h3, h4, h5, h6, strong) {
+    color: var(--text) !important;
+  }
+
+  .prose :where(h1, h2, h3, h4, h5, h6) :where(a) {
+    color: inherit !important;
+  }
+
+  [data-theme='dark'] .prose pre.astro-code,
+  [data-theme='dark'] .prose pre.astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  .prose :where(blockquote) {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+
+  .prose :where(a) {
+    color: var(--accent);
+  }
+
+  .prose :where(code) {
+    color: var(--accent);
+  }
+
+}

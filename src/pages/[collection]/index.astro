@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionList from '../../components/CollectionList.astro';
+import CollectionTree from '../../components/CollectionTree.astro';
+import { buildContentTree } from '../../lib/content';
+import { titleForEntry } from '../../lib/content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import type { CollectionName, ContentEntry } from '../../types';
+
+export async function getStaticPaths() {
+  return [
+    { params: { collection: 'docs' }, props: { collection: 'docs' as const } },
+    { params: { collection: 'misc' }, props: { collection: 'misc' as const } }
+  ];
+}
+
+const { collection } = Astro.props as { collection: CollectionName };
+const entries = (await getCollection(collection) as ContentEntry[]).sort((a, b) => titleForEntry(a).localeCompare(titleForEntry(b)));
+const tree = buildContentTree(entries);
+const label = collection === 'docs' ? 'Docs' : 'Misc';
+---
+
+<SiteLayout title={`${label} — O.`} active={collection}>
+  <section>
+    <p class="font-mono text-sm text-[var(--text-subtle)]">/{collection}</p>
+    <h1 class="mt-3 text-2xl font-semibold tracking-tight text-[var(--text)] sm:text-3xl">{label}</h1>
+    <p class="mt-4 max-w-2xl text-base leading-7 text-[var(--text-muted)]">
+      {collection === 'docs' ? 'Guides, references, and things I want to explain clearly.' : 'Loose notes, links, and experiments.'}
+    </p>
+    <div class="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
+      <CollectionList collection={collection} entries={entries} />
+      <aside class="rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] p-4 lg:sticky lg:top-6 lg:self-start">
+        <h2 class="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--text-subtle)]">Contents</h2>
+        <CollectionTree collection={collection} nodes={tree} />
+      </aside>
+    </div>
+  </section>
+</SiteLayout>
