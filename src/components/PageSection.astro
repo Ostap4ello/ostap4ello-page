@@ -1,0 +1,15 @@
+---
+interface Props {
+  title?: string;
+  compact?: boolean;
+}
+
+const { title, compact = false } = Astro.props;
+---
+
+<section class={compact ? 'mt-6' : 'mt-10'}>
+  {title && <h2 class="text-base font-semibold text-[var(--text)]">{title}</h2>}
+  <div class={title ? 'mt-4' : ''}>
+    <slot />
+  </div>
+</section>

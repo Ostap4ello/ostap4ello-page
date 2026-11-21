@@ -1,0 +1,29 @@
+---
+export interface TimelineEntry {
+  title: string;
+  meta: string;
+  description?: string;
+  bullets?: string[];
+}
+
+interface Props {
+  entries: TimelineEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<div class="border-l border-[var(--border)] pl-5 text-sm">
+  {entries.map((entry, index) => (
+    <div class={index === 0 ? '' : 'mt-5'}>
+      <h3 class="font-medium text-[var(--text)]">{entry.title}</h3>
+      <p class="mt-1 text-[var(--text-subtle)]">{entry.meta}</p>
+      {entry.description && <p class="mt-2 leading-6 text-[var(--text-muted)]">{entry.description}</p>}
+      {entry.bullets && (
+        <ul class="mt-3 list-disc space-y-2 pl-5 leading-6 text-[var(--text-muted)]">
+          {entry.bullets.map((bullet) => <li>{bullet}</li>)}
+        </ul>
+      )}
+    </div>
+  ))}
+</div>

@@ -1,0 +1,29 @@
+---
+export interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
+interface Props {
+  groups: SkillGroup[];
+  mode?: 'normal' | 'small';
+}
+
+const { groups, mode = 'normal' } = Astro.props;
+---
+
+<dl
+  class:list={[
+    'grid gap-3',
+    mode === 'normal' ? 'text-base sm:grid-cols-2' : 'text-sm sm:grid-cols-2'
+  ]}
+>
+  {groups.map((group) => (
+    <div class:list={[mode === 'small' && 'opacity-90']}>
+      <dt class="font-semibold text-[var(--text)]">{group.label}</dt>
+      <dd class="mt-1 leading-6 text-[var(--text-muted)]">
+        {group.items.join(' · ')}
+      </dd>
+    </div>
+  ))}
+</dl>

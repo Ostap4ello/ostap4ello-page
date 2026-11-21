@@ -1,0 +1,27 @@
+---
+export interface DefinitionItem {
+  term: string;
+  value: string;
+  href?: string;
+}
+
+interface Props {
+  items: DefinitionItem[];
+  bordered?: boolean;
+}
+
+const { items, bordered = false } = Astro.props;
+---
+
+<dl class:list={[
+  'not-prose grid gap-4 text-sm sm:grid-cols-2',
+]}>
+  {items.map((item) => (
+    <div>
+      <dt class="font-medium text-[var(--text)]">{item.term}</dt>
+      <dd class="mt-1 leading-6 text-[var(--text-muted)]">
+        {item.href ? <a class="text-[var(--accent)]" href={item.href}>{item.value}</a> : item.value}
+      </dd>
+    </div>
+  ))}
+</dl>
