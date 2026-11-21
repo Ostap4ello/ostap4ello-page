@@ -1,6 +1,6 @@
 ---
-title: Getting started
-description: A small example document to show the content shape.
+title: Document tree guide
+description: It is what it is.
 tags: [example]
 ---
 
