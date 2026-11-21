@@ -5,9 +5,67 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 <SiteLayout title="About me — O." active="about">
   <section class="max-w-2xl">
     <p class="text-sm font-medium uppercase tracking-[0.2em] text-[var(--text-subtle)]">About me</p>
-    <h1 class="mt-5 text-2xl font-semibold tracking-tight text-[var(--text)] sm:text-3xl">A quiet place for work and notes.</h1>
-    <p class="mt-6 max-w-xl text-base leading-7 text-[var(--text-muted)]">
-      Add a short introduction here: what you build, what you are learning, and where people can find you.
+    <h1 class="mt-5 text-2xl font-semibold tracking-tight text-[var(--text)] sm:text-3xl">Ostap Pelekh</h1>
+    <p class="mt-4 text-base leading-7 text-[var(--text-muted)]">
+      Master's student in Mathematical Modelling in Physics and Technology at Charles University. Prague-based, with a background in applied informatics and hands-on software engineering.
     </p>
+
+    <dl class="mt-8 grid gap-4 border-t border-[var(--border)] pt-6 text-sm sm:grid-cols-2">
+      <div>
+        <dt class="font-medium text-[var(--text)]">Location</dt>
+        <dd class="mt-1 text-[var(--text-muted)]">Prague, Czechia</dd>
+      </div>
+      <div>
+        <dt class="font-medium text-[var(--text)]">Languages</dt>
+        <dd class="mt-1 text-[var(--text-muted)]">English, Slovak, Ukrainian, German</dd>
+      </div>
+      <div>
+        <dt class="font-medium text-[var(--text)]">Email</dt>
+        <dd class="mt-1"><a class="text-[var(--accent)]" href="mailto:okpeleh@gmail.com">okpeleh@gmail.com</a></dd>
+      </div>
+      <div>
+        <dt class="font-medium text-[var(--text)]">LinkedIn</dt>
+        <dd class="mt-1"><a class="text-[var(--accent)]" href="https://www.linkedin.com/in/ostap-pelekh">ostap-pelekh</a></dd>
+      </div>
+    </dl>
+
+    <section class="mt-10">
+      <h2 class="text-base font-semibold text-[var(--text)]">Experience</h2>
+      <div class="mt-4 border-l border-[var(--border)] pl-5">
+        <h3 class="font-medium text-[var(--text)]">Software Engineer Intern — Nokia</h3>
+        <p class="mt-1 text-sm text-[var(--text-subtle)]">May 2025 – August 2026 · Bratislava, Slovakia</p>
+        <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-[var(--text-muted)]">
+          <li>Contributed to and debugged a large C/C++ codebase.</li>
+          <li>Built internal tools that improved team workflows and productivity.</li>
+          <li>Collaborated across teams to deliver reliable changes.</li>
+          <li>Used AI tools to improve development efficiency and automate work.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-base font-semibold text-[var(--text)]">Education</h2>
+      <div class="mt-4 grid gap-4 text-sm">
+        <div>
+          <h3 class="font-medium text-[var(--text)]">Charles University</h3>
+          <p class="mt-1 text-[var(--text-muted)]">M.Sc. Mathematical Modelling in Physics and Technology · September 2026 – July 2029</p>
+        </div>
+        <div>
+          <h3 class="font-medium text-[var(--text)]">Slovak University of Technology in Bratislava</h3>
+          <p class="mt-1 text-[var(--text-muted)]">B.Sc. Applied Informatics · September 2023 – July 2026</p>
+        </div>
+        <div>
+          <h3 class="font-medium text-[var(--text)]">Lviv Physics and Mathematics Lyceum</h3>
+          <p class="mt-1 text-[var(--text-muted)]">Physics and Mathematics · 2019 – 2023</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-base font-semibold text-[var(--text)]">Skills</h2>
+      <p class="mt-3 text-sm leading-6 text-[var(--text-muted)]">
+        Software development · C/C++ · Physics · Large language models · AI-assisted software development
+      </p>
+    </section>
   </section>
 </SiteLayout>

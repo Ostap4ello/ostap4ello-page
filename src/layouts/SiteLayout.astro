@@ -41,7 +41,7 @@ const links = [
   <body class="min-h-screen bg-[var(--background)] text-[var(--text)] antialiased">
     <header class="sticky top-0 z-20 border-b border-[var(--border)] bg-[var(--background)]">
       <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8" aria-label="Main navigation">
-        <a class="text-lg font-semibold tracking-tight text-[var(--text)]" href={withBase()}>O.</a>
+        <a class="text-lg font-semibold tracking-tight text-[var(--text)]" href={withBase()} aria-label="Ostap Pelekh home">OP</a>
         <div class="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 text-sm text-[var(--text-muted)]">
           {links.map((link) => (
             <a
