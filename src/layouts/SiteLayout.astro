@@ -45,7 +45,7 @@ const links = [
           <a class="text-lg font-semibold tracking-tight text-[var(--text)]" href={withBase()} aria-label="Ostap Pelekh home">OP</a>
           <button
             type="button"
-            class="flex size-8 items-center justify-center rounded-sm border border-[var(--border-strong)] text-base leading-none transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            class="flex size-8 items-center justify-center rounded-sm text-base leading-none transition hover:text-[var(--accent)]"
             data-theme-toggle
             aria-label="Current theme: system. Activate to switch theme."
           >
@@ -68,7 +68,7 @@ const links = [
         </div>
       </nav>
     </header>
-    <main class="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
+    <main class="mx-auto flex w-full max-w-6xl justify-center px-5 py-12 sm:px-8 sm:py-16">
       <slot />
     </main>
     <footer class="mx-auto max-w-6xl px-5 pb-10 text-sm text-[var(--text-subtle)] sm:px-8">

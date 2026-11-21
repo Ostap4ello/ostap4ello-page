@@ -33,8 +33,8 @@ const tree = buildContentTree(collectionEntries);
 ---
 
 <SiteLayout title={`${titleForEntry(entry)} — O.`} description={entry.data.description} active={collection}>
-  <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
-    <article class="min-w-0">
+  <div class="mx-auto grid w-full max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
+    <article class="mx-auto min-w-0 w-full max-w-3xl">
       <p class="font-mono text-sm text-[var(--text-subtle)]">{path}</p>
       <h1 class="mt-4 text-2xl font-semibold tracking-tight text-[var(--text)] sm:text-3xl">{titleForEntry(entry)}</h1>
       {entry.data.description && <p class="mt-4 text-base leading-7 text-[var(--text-muted)]">{entry.data.description}</p>}
