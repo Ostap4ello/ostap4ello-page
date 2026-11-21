@@ -5,14 +5,20 @@ import { withBase } from '../lib/urls';
 <div class="mt-8 flex flex-wrap gap-4 text-sm">
   <a
     class="rounded-sm bg-[var(--accent)] px-5 py-3 font-medium text-white transition hover:bg-[var(--accent-strong)]"
+    href={withBase('about')}
+  >
+    About me
+  </a>
+  <a
+    class="rounded-sm border border-[var(--border-strong)] px-5 py-3 font-medium text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
     href={withBase('docs')}
   >
     Read the docs
   </a>
   <a
     class="rounded-sm border border-[var(--border-strong)] px-5 py-3 font-medium text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-    href={withBase('about')}
+    href={withBase('misc')}
   >
-    About me
+    ...misc
   </a>
 </div>
