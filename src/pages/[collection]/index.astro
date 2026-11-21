@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import CollectionList from '../../components/CollectionList.astro';
 import CollectionTree from '../../components/CollectionTree.astro';
 import { buildContentTree } from '../../lib/content';
 import { titleForEntry } from '../../lib/content';
@@ -28,7 +27,6 @@ const label = collection === 'docs' ? 'Docs' : 'Misc';
       {collection === 'docs' ? 'Guides, references, and things I want to explain clearly.' : 'Loose notes, links, and experiments.'}
     </p>
     <div class="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
-      <CollectionList collection={collection} entries={entries} />
       <aside class="rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] p-4 lg:sticky lg:top-6 lg:self-start">
         <h2 class="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--text-subtle)]">Contents</h2>
         <CollectionTree collection={collection} nodes={tree} />

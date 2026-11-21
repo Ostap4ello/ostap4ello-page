@@ -35,22 +35,24 @@ const tree = buildContentTree(collectionEntries);
 <SiteLayout title={`${titleForEntry(entry)} — O.`} description={entry.data.description} active={collection}>
   <div class="mx-auto grid w-full max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
     <article class="mx-auto min-w-0 w-full max-w-3xl">
-      <p class="font-mono text-sm text-[var(--text-subtle)]">{path}</p>
-      <h1 class="mt-4 text-2xl font-semibold tracking-tight text-[var(--text)] sm:text-3xl">{titleForEntry(entry)}</h1>
-      {entry.data.description && <p class="mt-4 text-base leading-7 text-[var(--text-muted)]">{entry.data.description}</p>}
-      <div class="prose mt-10 max-w-none prose-headings:scroll-mt-8 prose-a:text-[var(--accent)] prose-code:text-[var(--accent)]">
+       <div class="mx-auto flex w-full max-w-5xl items-center justify-between gap-10">
+        <p class="font-mono text-sm text-[var(--text-subtle)]">{path}</p>
+        <a class="text-right text-sm text-[var(--text-muted)] transition hover:text-[var(--accent)]" href={withBase(collection)}>
+          ← Back to {label}
+        </a>
+      </div>
+      <!-- <h1 class="mt-4 text-sm font-semibold tracking-tight text-[var(--text)] sm:text-xl">{titleForEntry(entry)}</h1> -->
+      {entry.data.description && <p class="mt-2 text-base leading-7 text-[var(--text-muted)]">{entry.data.description}</p>}
+      <div class="prose mt-6 max-w-none prose-headings:scroll-mt-8 prose-a:text-[var(--accent)] prose-code:text-[var(--accent)]">
         <Content />
       </div>
     </article>
     <div class="lg:pt-1">
       <aside class="rounded-sm border border-[var(--border)] bg-[var(--surface-muted)] p-4">
-        <h2 class="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--text-subtle)]">{label} contents</h2>
+        <h2 class="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--text-subtle)]">File Tree</h2>
         <CollectionTree collection={collection} nodes={tree} />
       </aside>
       <TableOfContents headings={headings as TocHeading[]} />
-      <a class="mt-4 block text-sm text-[var(--text-muted)] transition hover:text-[var(--accent)]" href={withBase(collection)}>
-        ← Back to {label}
-      </a>
     </div>
   </div>
 </SiteLayout>
