@@ -12,6 +12,7 @@
   --text-subtle: #80868b;
   --border: #dadce0;
   --border-strong: #bdc1c6;
+  --divider: #bdc1c6;
   --accent: #1a73e8;
   --accent-strong: #1557b0;
 }
@@ -26,6 +27,7 @@
   --text-subtle: #9aa0a6;
   --border: #3c4043;
   --border-strong: #5f6368;
+  --divider: #5f6368;
   --accent: #8ab4f8;
   --accent-strong: #aecbfa;
 }
@@ -59,7 +61,7 @@
     --tw-prose-bullets: var(--text-muted);
     --tw-prose-hr: var(--border);
     --tw-prose-quotes: var(--text);
-    --tw-prose-quote-borders: var(--border-strong);
+    --tw-prose-quote-borders: var(--divider);
     --tw-prose-captions: var(--text-muted);
     --tw-prose-kbd: var(--text);
     --tw-prose-code: var(--accent);
@@ -136,7 +138,8 @@
 
   .prose :where(blockquote) {
     color: var(--text);
-    border-color: var(--border-strong);
+    border-color: var(--divider) !important;
+    border-inline-start-width: 4px !important;
     font-style: normal !important;
     font-weight: 400;
   }

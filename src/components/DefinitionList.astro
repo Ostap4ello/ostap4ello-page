@@ -7,10 +7,9 @@ export interface DefinitionItem {
 
 interface Props {
   items: DefinitionItem[];
-  bordered?: boolean;
 }
 
-const { items, bordered = false } = Astro.props;
+const { items } = Astro.props;
 ---
 
 <dl class:list={[

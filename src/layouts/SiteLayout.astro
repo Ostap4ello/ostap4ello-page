@@ -41,7 +41,17 @@ const links = [
   <body class="min-h-screen bg-[var(--background)] text-[var(--text)] antialiased">
     <header class="sticky top-0 z-20 border-b border-[var(--border)] bg-[var(--background)]">
       <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8" aria-label="Main navigation">
-        <a class="text-lg font-semibold tracking-tight text-[var(--text)]" href={withBase()} aria-label="Ostap Pelekh home">OP</a>
+        <div class="flex items-center gap-3">
+          <a class="text-lg font-semibold tracking-tight text-[var(--text)]" href={withBase()} aria-label="Ostap Pelekh home">OP</a>
+          <button
+            type="button"
+            class="flex size-8 items-center justify-center rounded-sm border border-[var(--border-strong)] text-base leading-none transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            data-theme-toggle
+            aria-label="Current theme: system. Activate to switch theme."
+          >
+            <span aria-hidden="true" data-theme-icon>◐</span>
+          </button>
+        </div>
         <div class="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 text-sm text-[var(--text-muted)]">
           {links.map((link) => (
             <a
@@ -55,14 +65,6 @@ const links = [
               {link.label}
             </a>
           ))}
-          <button
-            type="button"
-            class="rounded-sm border border-[var(--border-strong)] px-3 py-1.5 text-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-            data-theme-toggle
-            aria-label="Current theme: system. Activate to switch theme."
-          >
-            Theme: system
-          </button>
         </div>
       </nav>
     </header>
@@ -74,14 +76,15 @@ const links = [
     </footer>
     <script is:inline>
       const themeButton = document.querySelector('[data-theme-toggle]');
+      const themeIcon = document.querySelector('[data-theme-icon]');
       const getTheme = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
       const updateThemeButton = () => {
         if (themeButton) {
           const theme = getTheme();
-          themeButton.textContent = `Theme: ${theme}`;
           themeButton.setAttribute('aria-label', `Current theme: ${theme}. Activate to switch theme.`);
           themeButton.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
         }
+        if (themeIcon) themeIcon.textContent = getTheme() === 'dark' ? '☀' : '☾';
       };
       themeButton?.addEventListener('click', () => {
         const nextTheme = getTheme() === 'dark' ? 'light' : 'dark';
