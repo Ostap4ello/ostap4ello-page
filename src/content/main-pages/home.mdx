@@ -6,13 +6,12 @@ description: "Portfolio of Ostap Pelekh, computer science student and software e
 import ActionLinks from '../../components/ActionLinks.astro';
 import { withBase } from '../../lib/urls';
 
-<div
-  class="w-full h-[200px] mask-y-from-75% mask-y-to-100% overflow-hidden"
->
-<img src={withBase('/b1.jpg')} alt="Banner"
-  class="w-full h-[200px] object-cover object-[50%_63%] contrast-90"
-/>
-</div>
+<div 
+  style={`background-image: url('${withBase('/b1.jpg')}');`}
+  class="w-full h-[200px] bg-cover bg-[position:50%_63%] bg-size-[150%] mask-y-from-75% mask-y-to-100% contrast-90"
+  role="img"
+  aria-label="Banner"
+></div>
 
 **Ostap Pelekh**
 
